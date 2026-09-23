@@ -1,0 +1,16 @@
+# Środowisko wirtualne
+.venv/
+venv/
+
+# Pamięć podręczna Pythona i pytesta
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Pliki systemowe macOS
+.DS_Store
+
+# Raporty i logi testowe
+*.log
+test-results/
+playwright-report/
