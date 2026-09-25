@@ -28,6 +28,13 @@ jobs:
         run: |
           playwright install --with-deps chromium
 
-      - name: Run Pytest test suite
+      - name: Run Pytest test suite with HTML report
         run: |
-          pytest -v
+          pytest -v --html=report.html --self-contained-html
+
+      - name: Upload Test Report Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-html-report
+          path: report.html
