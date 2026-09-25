@@ -1,6 +1,7 @@
 import pytest
-from pages.login_page import LoginPage
+
 from pages.dynamic_loading_page import DynamicLoadingPage
+from pages.login_page import LoginPage
 
 
 @pytest.fixture

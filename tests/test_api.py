@@ -37,8 +37,8 @@ def test_update_post_success():
     data = response.json()
 
     assert response.status_code == 200
-    for key in payload.keys():
-        assert data[key] == payload[key]
+    for key, value in payload.items():
+        assert data[key] == value
 
 
 def test_delete_post_success():
