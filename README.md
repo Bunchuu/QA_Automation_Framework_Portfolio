@@ -4,6 +4,7 @@
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Playwright](https://img.shields.io/badge/playwright-tested-green.svg)
 ![Pytest](https://img.shields.io/badge/pytest-ready-brightgreen.svg)
+![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)
 
 Lightweight test automation framework demonstrating API and Web UI test strategies using Python, Playwright, and Pytest, fully integrated with GitHub Actions CI/CD.
 
@@ -19,9 +20,13 @@ Lightweight test automation framework demonstrating API and Web UI test strategi
   * Implemented using the **Page Object Model (POM)** pattern.
   * Authentication flows: positive login and negative validation scenarios.
   * Asynchronous DOM rendering and explicit timeout handling.
+* **Code Quality & Linting:**
+  * Static code analysis with **Ruff** ensuring strict compliance with PEP 8 standards.
 * **CI/CD Pipeline (`.github/workflows/tests.yml`):**
   * Automated regression pipeline triggered on every `push` and `pull_request` to `main`.
+  * Pre-test quality gate executing `ruff check .` for static analysis.
   * Multi-step headless execution on clean Ubuntu Linux runners.
+  * Standalone HTML test report generated and uploaded as a build artifact via `actions/upload-artifact`.
 
 ---
 
@@ -67,7 +72,12 @@ QA_Automation_Framework_Portfolio/
    playwright install chromium
    ```
 
-4. **Run the test suite:**
+4. **Run code linting:**
+   ```bash
+   ruff check .
+   ```
+   
+5. **Run the test suite:**
    ```bash
    pytest -v
    ```
