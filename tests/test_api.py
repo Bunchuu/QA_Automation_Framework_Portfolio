@@ -53,3 +53,12 @@ def test_get_non_existent_post_returns_404():
     response = requests.get(f"{BASE_URL}/9999")
 
     assert response.status_code == 404
+
+
+def test_get_all_posts_returns_list():
+    response = requests.get(BASE_URL)
+    data = response.json()
+
+    assert response.status_code == 200
+    assert isinstance(data, list)
+    assert len(data) > 0
