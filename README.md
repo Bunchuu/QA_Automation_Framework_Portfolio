@@ -3,30 +3,31 @@
 ![Automated Regression Suite](https://github.com/Bunchuu/QA_Automation_Framework_Portfolio/actions/workflows/tests.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Playwright](https://img.shields.io/badge/playwright-tested-green.svg)
+![Docker](https://img.shields.io/badge/docker-containerized-blue.svg)
 ![Pytest](https://img.shields.io/badge/pytest-ready-brightgreen.svg)
 ![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)
 
-Lightweight test automation framework demonstrating API and Web UI test strategies using Python, Playwright, and Pytest, fully integrated with GitHub Actions CI/CD.
+Lightweight test automation framework demonstrating REST API and Web UI test strategies using Python, Playwright, and Pytest, containerized with Docker and fully integrated into a GitHub Actions CI/CD pipeline.
 
 ---
 
 ## Test Scope
 
 * **API Testing (`tests/test_api.py`):**
-  * Full CRUD coverage on REST endpoints (GET, POST, PUT, DELETE).
-  * Negative test scenarios and contract validation (404 Not Found handling).
-  * Response payload and schema assertions.
+  * Full CRUD lifecycle coverage on REST endpoints (GET, POST, PUT, DELETE).
+  * Contract verification, schema validation, and collection assertions.
+  * Negative test scenarios and standard error handling (404 Not Found).
 * **UI Testing (`tests/test_ui.py` + `pages/`):**
   * Implemented using the **Page Object Model (POM)** pattern.
-  * Authentication flows: positive login and negative validation scenarios.
-  * Asynchronous DOM rendering and explicit timeout handling.
+  * Authentication flows: positive login and negative error validation.
+  * Dynamic list operations, element state assertions, and live count verifications.
+  * Headless browser execution with centralized fixture management (`conftest.py`).
 * **Code Quality & Linting:**
-  * Static code analysis with **Ruff** ensuring strict compliance with PEP 8 standards.
+  * Static code analysis with **Ruff** enforcing PEP 8 standards.
 * **CI/CD Pipeline (`.github/workflows/tests.yml`):**
   * Automated regression pipeline triggered on every `push` and `pull_request` to `main`.
-  * Pre-test quality gate executing `ruff check .` for static analysis.
-  * Multi-step headless execution on clean Ubuntu Linux runners.
-  * Standalone HTML test report generated and uploaded as a build artifact via `actions/upload-artifact`.
+  * Multi-step headless test execution on Ubuntu Linux runners.
+  * Automated HTML regression report generated and preserved as a build artifact.
 
 ---
 
@@ -34,33 +35,36 @@ Lightweight test automation framework demonstrating API and Web UI test strategi
 
 ```text
 QA_Automation_Framework_Portfolio/
+├── .dockerignore              # Docker build exclusions
 ├── .github/
 │   └── workflows/
-│       └── tests.yml          # GitHub Actions CI pipeline configuration
+│       └── tests.yml          # GitHub Actions CI/CD pipeline configuration
+├── .gitignore                 # Git ignore rules
+├── Dockerfile                 # Containerized test runner environment
+├── README.md                  # Project documentation
+├── conftest.py                # Centralized pytest fixtures & test setup
 ├── pages/
-│   ├── __init__.py
-│   ├── dynamic_loading_page.py # Dynamic loading Page Object
-│   └── login_page.py          # Authentication Page Object
-├── tests/
-│   ├── __init__.py
-│   ├── test_api.py            # API regression tests (requests)
-│   └── test_ui.py             # Web UI regression tests (Playwright)
-├── conftest.py                # Shared fixtures and test configuration
+│   ├── __init__.py            # Package initialization marker
+│   ├── login_page.py          # Authentication Page Object Model
+│   └── todo_page.py           # Task management Page Object Model
 ├── requirements.txt           # Project dependencies
-└── .gitignore                 # Untracked files filter
+└── tests/
+    ├── __init__.py            # Package initialization marker
+    ├── test_api.py            # API regression test suite (CRUD & contract validation)
+    └── test_ui.py             # Web UI test suite (Playwright POM)
 ```
 
 ---
 
 ## Local Setup
 
-1. **Clone the repository and navigate to root:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Bunchuu/QA_Automation_Framework_Portfolio.git
    cd QA_Automation_Framework_Portfolio
    ```
 
-2. **Create and activate a virtual environment:**
+2. **Setup virtual environment:**
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
@@ -72,12 +76,22 @@ QA_Automation_Framework_Portfolio/
    playwright install chromium
    ```
 
-4. **Run code linting:**
+4. **Run static analysis:**
    ```bash
    ruff check .
    ```
    
-5. **Run the test suite:**
+5. **Execute tests with HTML report:**
    ```bash
-   pytest -v
+   pytest -v --html=report.html --self-contained-html
    ```
+
+---
+
+## Docker Execution
+
+Run the complete headless test suite in an isolated Linux container:
+```bash
+docker build -t qa-portfolio-tests .
+docker run --rm qa-portfolio-tests
+```
