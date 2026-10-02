@@ -1,7 +1,6 @@
 import pytest
-
-from pages.dynamic_loading_page import DynamicLoadingPage
 from pages.login_page import LoginPage
+from pages.todo_page import TodoPage
 
 
 @pytest.fixture
@@ -12,7 +11,7 @@ def login_page(page):
 
 
 @pytest.fixture
-def dynamic_page(page):
-    dp = DynamicLoadingPage(page)
-    dp.navigate()
-    return dp
+def todo_page(page):
+    tp = TodoPage(page)
+    tp.navigate()
+    return tp
