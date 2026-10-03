@@ -23,6 +23,7 @@ Lightweight test automation framework demonstrating REST API and Web UI test str
   * Parameterized authentication test cases verifying multiple error states and input validations.
   * Dynamic list operations, element state assertions, and live count verifications.
   * Headless browser execution with centralized fixture management (`conftest.py`).
+  * Automated failure diagnostics capturing screenshots and Playwright traces on test failure.
 * **Code Quality & Linting:**
   * Static code analysis with **Ruff** enforcing PEP 8 standards.
 * **CI/CD Pipeline (`.github/workflows/tests.yml`):**
@@ -85,6 +86,11 @@ QA_Automation_Framework_Portfolio/
 5. **Execute tests with HTML report:**
    ```bash
    pytest -v --html=report.html --self-contained-html
+   ```
+
+6. **Inspect failure traces (Playwright Trace Viewer):**
+   ```bash
+   playwright show-trace test-results/trace_<test_name>.zip
    ```
 
 ---
