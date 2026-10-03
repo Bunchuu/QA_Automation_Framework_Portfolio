@@ -86,7 +86,7 @@ QA_Automation_Framework_Portfolio/
    
 5. **Execute tests with HTML report:**
    ```bash
-   pytest -v --html=report.html --self-contained-html
+   pytest --html=report.html --self-contained-html
    ```
 
 6. **Inspect failure traces (Playwright Trace Viewer):**
