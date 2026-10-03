@@ -49,6 +49,7 @@ QA_Automation_Framework_Portfolio/
 │   ├── __init__.py            # Package initialization marker
 │   ├── login_page.py          # Authentication Page Object Model
 │   └── todo_page.py           # Task management Page Object Model
+├── pytest.ini                 # Pytest runner and discovery configuration
 ├── requirements.txt           # Project dependencies
 └── tests/
     ├── __init__.py            # Package initialization marker
