@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import expect
 
 
@@ -25,10 +26,18 @@ def test_successful_login(login_page, page):
     expect(login_page.inventory_title).to_have_text("Products")
 
 
-def test_failed_login_shows_error(login_page):
-    login_page.login("locked_out_user", "secret_sauce")
+@pytest.mark.parametrize("username, password, expected_error", [
+    ("locked_out_user", "secret_sauce", 
+     "Sorry, this user has been locked out."),
+     ("standard_user", "wrong_password", 
+      "Username and password do not match any user in this service"),
+      ("", "secret_sauce", "Username is required")
+])
+def test_failed_login_shows_error(
+    login_page, username, password, expected_error):
+    login_page.login(username, password)
 
     expect(login_page.error_message).to_be_visible()
-    expect(login_page.error_message).to_have_text(
-        "Epic sadface: Sorry, this user has been locked out."
+    expect(login_page.error_message).to_contain_text(
+        expected_error
         )

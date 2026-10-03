@@ -1,23 +1,35 @@
+import pytest
 import requests
 
 BASE_URL = "https://jsonplaceholder.typicode.com/posts"
 
 
-def test_get_single_post():
-    response = requests.get(f"{BASE_URL}/1")
+@pytest.mark.parametrize("post_id, expected_user_id",[
+    (1, 1),
+    (2, 1),
+    (3, 1)
+])
+def test_get_single_post(post_id, expected_user_id):
+    response = requests.get(f"{BASE_URL}/{post_id}")
     data = response.json()
 
     assert response.status_code == 200
-    assert data["id"] == 1
-    assert data["userId"] == 1
+    assert data["id"] == post_id
+    assert data["userId"] == expected_user_id
 
 
-def test_create_post():
-    payload = {
-        "title": "Portfolio Automation",
-        "body": "Continuous Integration Test",
-        "UserId": 1
-    }
+@pytest.mark.parametrize("payload", [
+    {"title": "Portfolio Automation",
+    "body": "Continuous Integration Test",
+    "UserId": 1},
+    {"title": "X",
+     "body": "abc",
+     "UserId": 7},
+     {"title": "Y",
+      "body": "def",
+      "UserId": 15}
+])
+def test_create_post(payload):
     response = requests.post(BASE_URL, json=payload)
     data = response.json()
 
@@ -49,8 +61,9 @@ def test_delete_post_success():
     assert data == {}
 
 
-def test_get_non_existent_post_returns_404():
-    response = requests.get(f"{BASE_URL}/9999")
+@pytest.mark.parametrize("post_id", [-1, 0, 99999])
+def test_get_non_existent_post_returns_404(post_id):
+    response = requests.get(f"{BASE_URL}/{post_id}")
 
     assert response.status_code == 404
 
