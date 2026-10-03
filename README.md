@@ -15,11 +15,12 @@ Lightweight test automation framework demonstrating REST API and Web UI test str
 
 * **API Testing (`tests/test_api.py`):**
   * Full CRUD lifecycle coverage on REST endpoints (GET, POST, PUT, DELETE).
+  * Data-driven testing with `@pytest.mark.parametrize` for positive and negative scenarios.
+  * Negative test handling across invalid payload structures and non-existent IDs (404 Not Found).
   * Contract verification, schema validation, and collection assertions.
-  * Negative test scenarios and standard error handling (404 Not Found).
 * **UI Testing (`tests/test_ui.py` + `pages/`):**
   * Implemented using the **Page Object Model (POM)** pattern.
-  * Authentication flows: positive login and negative error validation.
+  * Parameterized authentication test cases verifying multiple error states and input validations.
   * Dynamic list operations, element state assertions, and live count verifications.
   * Headless browser execution with centralized fixture management (`conftest.py`).
 * **Code Quality & Linting:**
