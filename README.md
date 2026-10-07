@@ -1,6 +1,6 @@
 # QA Automation Framework Portfolio
 
-![Automated Regression Suite](https://github.com/Bunchuu/QA_Automation_Framework_Portfolio/actions/workflows/tests.yml/badge.svg)
+[![Automated Regression Suite](https://github.com/Bunchuu/QA_Automation_Framework_Portfolio/actions/workflows/tests.yml/badge.svg)](https://github.com/Bunchuu/QA_Automation_Framework_Portfolio/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Playwright](https://img.shields.io/badge/playwright-tested-green.svg)
 ![Docker](https://img.shields.io/badge/docker-containerized-blue.svg)
